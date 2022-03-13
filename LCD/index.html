@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Alaa's Website</title>
+</head>
+<body>
+
+    <canvas id="bg"></canvas>
+
+    <main>
+
+        <header>
+            <h1>Alaa Abboud</h1>
+            <p>⚙️ Welcome to my project portfolio!</p>
+            <p>On your right, you can see the Robo-squad </p>
+        </header>
+
+
+        <blockquote>
+            <p> Machine and Deep Learning </p>
+        </blockquote>
+
+        <section>
+            <h2>👨‍💻 Multi-modal Emotion Recognition System</h2>
+            <p>
+                Motivation  <br> <br> The project was influenced by socially assistive robots (SARs) and the philanthropic scope of AI in medicine. Dementia patients can struggle with recurring feelings of anxiousness, agitation, and loneliness. In order to help both patients and caregivers better cope, we developed a platform capable of recognizing the patient’s current emotional state and interacting accordingly to better his/her emotional well-being.
+            </p>
+
+            <p>
+                Technical Implementation  <br> <br> The system utilizes speech/tone  and facial expressions of the patient, 2 of the main indicators of emotion, to infer the patient's current state.<br> <br>
+                <img src="EmotionRecognition/System.JPG" width="300" height="300" />
+
+                <br> <br> Presented below is the Facial-Expressions-Based Emotion Recognition only, as the Audio-Emotion Recognition algorithm is not as intuitive to explain in a very small space.
+                <br> <br> Facial-Expressions-Based Emotion Recognition <br> <br>
+                The Facial Expression Recognition (FER) architecture utilizes Convolutional Neural Networks, face detection algorihms, and other complementary computer vision practices to classify a user/patient’s current feelings from a multitude of emotions.
+                <br> Below is a showcase of the inference process:<br><br>
+                <img src="EmotionRecognition/FER.JPG" width="500" height="500" />
+                <br><br> Interpretability: <br><br>
+                Saliency maps were used to get further intuition of what regions and features of a pictures does our CNN focus on to infer corresponding emotions.
+                <br>Below are saliency maps for data samples classified as Happy, Disgust, Angry, and Surpise respectively:
+                <br><br> <img src="EmotionRecognition/Saliency_Map.JPG" width="400" height="250" />
+            </p>
+
+            <!---
+        <p>
+            <br> Speech/Audio Emotion Recognition <br> <br>
+            <img src="AER.JPG" width="720" height="100" />
+            <br> <br> Voice Activity Detecion <br> <br>
+            A 'VAD' algotrithm was used to remove unnecessary silences from input audio signals that would otherwise confuse the AER model if accounted for during the feature extraction stage.
+            <br> <br> Below is the output signal (in green) of the audio input (in blue) after being preprocessed using a 'VAD' algorithm: <br> <br>
+            <img src="VAD.JPG" width="300" height="250" />
+            <br> <br> Feature Extraction <br> <br>
+            Specific key prosodic features of an audio signal were extracted. We noticed that a feature, independently, does not allow for clear separation between different emotions. My colleagues and I thus decided to create new 2D feature vectors that would separate emotions into different groups.
+            <br> <br> SVM-Based Classification <br> <br>
+            We designed an architecture of cascaded SVMs, based on analysis of the results we got during feature engineering and data preprocessing, to infer the emotion conveyed by an audio input:
+            <br> <br> <img src="SVM_Cascade.JPG" width="450" height="300" />
+            <br> <br> Each SVM was trained on a different set of feaures and only on data samples corresponding to the groups being classified.
+            <br> <br> Below is a figure of separating boundary computed by SVM-3 in the (Pitch , Zero-Crossing-Rate) 2D space, where the blue datapoints correspond to the 'Angry' emotion and the red datapoints correspond to samples with either 'Happy' or 'Fear' Emotion:
+            <br> <br> <img src="SVM3.JPG" width="350" height="250" />
+        </p>
+        -->
+
+        </section>
+
+        <blockquote>
+            <p> Robot Navigation </p>
+        </blockquote>
+
+        <section class="light">
+            <h2>📍 FastSLAM Implementation</h2>
+
+            <p>
+                The whole algorithm was built form scratch, without the aid of SLAM-related libraries.The algorithm was Implmented through ROS and MATLAB and was tested and validated on the 'Husky' robot simulation navigating the 'Playpen' environment in Gazebo.
+                <br> <br> Below is a comparison of the 'Playpen' environment and the one built by the FastSLAM algoritm after a few iterations:
+                <br> <br> <img src="FastSLAM/Playpen_Gazebo.JPG" width="450" height="300" /> <img src="FastSLAM/playpen_SLAM.png" width="450" height="300" />
+                <br> <br> <a href="https://github.com/Alaa-Abboud/FastSLAM.git">Click to visit the Github code! - Make sure to 'right click' and open as a 'New tab'</a>
+
+            </p>
+
+
+
+        </section>
+
+        <blockquote>
+            <p> Destination-based Navigation </p>
+        </blockquote>
+
+        <section class="light">
+            <h2> Thymio </h2>
+
+            <p>
+                The Goal is for The robot "Thymio" to travel from any starting point to any given destination point in an optimal way (distance-wise), while adapting to changes in the environment throught the process.
+                <br> <br> Implementation:
+                <br> <br> The camera plays a crucial role in this project. Not only is it used to take a picture of the map, which will then be processed to detect contours, extract vertices and correspondingly compute visibility graphs, but it is the sensor upon which our Localization algorithm works.
+                <br> <br> All of the above requires a top-view of the map / environment. Consequently, A Bird's Eye-view transformation was applied to original camera input, while perserving the aspect ratio of the map and its contents.
+                <br> <br> <img src="MobileRobotics/1.png" width="320" height="240" />  <img src="MobileRobotics/2.png" width="320" height="240" />
+            </p>
+
+            <p>
+                Detection of the robot's initial pose and the final destination to reach was done using Aruco Markers.
+                <br> <br> <img src="MobileRobotics/aruco_start.jpg" width="320" height="240" />  <img src="MobileRobotics/aruco_goal.jpg" width="320" height="240" />
+
+                <br> <br> Global Path Planning was done by first extracting the obstacle's vertices and then computing a visibilty graph. A modified A-star algorithm was applied on the visibility graph to find the distance-wise optimal path. The path was then discretized for smoother motion and to accomodate our pose-to-goal control law.
+                <br> <br> <img src="MobileRobotics/optimal_path.JPG" width="320" height="240" /> <img src="MobileRobotics/discretize.JPG" width="400" height="240" />
+
+                <br> <br> A Local Navigation algorithm was also implemented to avoid any unprecedented obstacles. After avoiding said obstacle, the control law brings the robot back along the optimal path. Below is a scenario showcasing local avoidance (the green line is our computed optimal path).
+                <br> <br> <img src="MobileRobotics/local_navigation.JPG" width="700" height="175" />
+
+                <br> <br> Continuous Localization of the robot's pose was done through an Extended Kalman Filter. We used the camera and the attached aruco marker to create a sensor measurement of the robot's pose that would help correct the error from our mathematical motion model.
+
+                <br> <br> Below is a snapshot of the project demo:
+                <br> <br> <img src="MobileRobotics/Demo_snapshot.JPG" width="500" height="400" />
+                <br> <br> <a href="https://youtu.be/Htc53pRaKMg">Click to visit and watch a Youtube video of the Demo! - Make sure to 'right click' and open as a 'New tab'</a>
+
+            </p>
+
+        </section>
+
+        <blockquote>
+            <p> Control Systems Projects </p>
+        </blockquote>
+
+
+        <section class="light">
+            <h2>🚗 Multi-Variable Control for Autonomous Vehicle Path-Tracking </h2>
+
+            <p>
+                the Dynamics of a moving vehicle were modeled and linearized through Jacobian matrices.
+                <br> <br>An LQR controller was designed to allow the vehicle to track a pre-defined path.
+                <br> <br>An LQR state observer was designed to estimate the usually non-measurable states in real life (i.e. acts as a virtual sensor)
+                <br> <br> Below is a MATLAB simulation of a vehicle following a pre-defined path with minimal error.
+                <video width="400" height="300" controls>
+                    <source src="MultiVariable_Control/path_tracking_LQR.mp4" type="video/mp4">
+                </video>
+                <br><br> Also attached is snapshot comparison of the pre-defined path (in blue dashes) and the vehivle's path (in orange).
+                <br> <br> <img src="MultiVariable_Control/LQR_path_tracking.JPG" width="450" height="300" />
+            </p>
+
+        </section>
+
+        <section class="light">
+            <h2>🚀 Rocket Model Predictive Control (MPC) </h2>
+
+            <p>
+                The goal is to design an MPC Controller allowing the rocket to track a path with acute direction changes and under random disturbances.
+                <br> <br> Below is a MATLAB simulation of the rocket tracking  an 'MPC' shape in 3D space.
+                <video width="400" height="300" controls>
+                    <source src="MPC/MPC.mp4" type="video/mp4">
+                </video>
+                <br><br> Also attached is snapshot comparison of the pre-defined path (in black dashes) and the rocket's path (in blue dots).
+                <br> <br> <img src="MPC/MPC.JPG" width="450" height="300" />
+            </p>
+
+        </section>
+
+
+        <blockquote>
+            <p> Game Development </p>
+        </blockquote>
+
+        <section class="light">
+            <h2>🎮 ''Defend Your Castle'' Phygital Game </h2>
+
+            <p>
+                Developed an Interactive game whereby the player must defend the castle from incoming enemy ships. The only means of defense is a catapult.
+                <br> <br> A physical prototype of the catapult is built and the controlled in real life. The motions of loading the catapult and launching it are translated into the virtual game whereby a virtual model parallels the same movements.
+                <br> <br> The Catapult was modeled on SOLIDWORKS:
+                <br> <br> <img src="PhygitalGame/catapult.JPG" width="450" height="300" />
+                <br> <br> The physical prototype was built using laser cutters and plexi-glass. Catapult shafts were coupled with sensors that detect motion and translate it into the virtual game:
+                <br> <br> <img src="PhygitalGame/sensor_attachment.JPG" width="450" height="300" />
+                <br> <br> The game environment was built in the Unity game engine:
+                <br> <br> <img src="PhygitalGame/unity_game.JPG" width="450" height="300" />
+                <br> <br> A snapshot of the game being played:
+                <br> <br> <img src="PhygitalGame/game_playing.JPG" width="450" height="300" />
+                <br> <br> <a href="https://youtu.be/1Jp7DeRfdIg">Click to visit and watch a Youtube video of the game being played! - Make sure to 'right click' and open as a 'New tab'</a>
+
+            </p>
+
+        </section>
+
+        <blockquote>
+            <p> Low-Level Hardware: Custom-Designed Embedded System </p>
+        </blockquote>
+
+        <section class="light">
+            <h2> 📟 FPGA-Based LCD System </h2>
+
+            <p>
+                the goal was to design and implement an FPGA-Based LCD Controller unit able to display stored images in memory.
+
+                <br> <br> High-Level Diagram:
+                <br> <br> <img src="LCD/high_level.png" width="650" height="150" />
+
+                <br> <br> Custom LCD Block Diagram:
+                <br> <br> <img src="LCD/block_diagram.png" width="500" height="400" />
+                <br> <br>  The 3 subcomponents: Registers, Direct Memory Access (DMA), and LCD Control were coded from scrach in VHDL and validated on ModelSim before synthesizing the system on the FPGA.
+
+                <br> <br> Finite State Machines (FSMs):
+                <br> <br> FSMs were first designed for the DAM and LCD Control units to accomadate specific timing diagrams and signal input-output specifications required for each unit to function properly.
+                <br> <br> <img src="LCD/fsm_dma.png" width="300" height="400" /> <img src="LCD/fsm_lcd.png" width="300" height="400" />
+
+                <br> <br> Final Result:
+                <br> <br> we stored an image of a dog in the FPGA's SDRAM memory, and ran our custom system to check what it displays. Below is the stored image displayed on our LCD screen.
+                <br> <br> <img src="LCD/lcd_display.jpg" width="300" height="400" />
+
+            </p>
+
+        </section>
+
+
+        <blockquote>
+            <p>Thanks for Visiting! Have a Great Day ^-^ </p>
+        </blockquote>
+
+
+    </main>
+
+    <script type="module" src="/main.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
